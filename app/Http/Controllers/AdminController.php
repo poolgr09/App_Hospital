@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consultorio;
 use App\Models\Especialidades;
+use App\Models\horarios;
 use App\Models\Medicos;
 use App\Models\Pacientes;
 use App\Models\Secretaria;
@@ -18,6 +20,9 @@ class AdminController extends Controller
         $total_pacientes = Pacientes::count();
         $total_medicos = Medicos::count();
         $total_especialidades = Especialidades::count();
-        return view('admin.index', compact('total_usuarios','total_secretarias','total_pacientes','total_medicos','total_especialidades'));
+        $total_horarios= horarios::count();
+        $total_consultorios= Consultorio::count();
+        return view('admin.index', compact('total_usuarios','total_secretarias','total_pacientes','total_medicos',
+        'total_especialidades','total_horarios','total_consultorios'));
     }
 }

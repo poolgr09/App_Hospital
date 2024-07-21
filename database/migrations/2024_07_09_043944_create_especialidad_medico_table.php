@@ -13,10 +13,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('especialidad_medico', function (Blueprint $table) {
+            
             $table->id();
+            
+            $table->unsignedBigInteger('especialidad_id');
+            $table->foreign('especialidad_id')->references('id')->on('especialidades')-> cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->foreignId('especialidad_id')->nullable()->constrained('especialidades')-> cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('medico_id')->nullable()->constrained('medicos')-> cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedBigInteger('medico_id');
+            $table->foreign('medico_id')->references('id')->on('medicos')-> cascadeOnUpdate()->cascadeOnDelete();
+
+                       
 
             $table->timestamps();
         });

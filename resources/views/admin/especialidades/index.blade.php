@@ -25,7 +25,7 @@
                             
                             <th scope="col">Nombre</th>
                             <th scope="col">Descripcion</th>
-                            
+                            <th scope="col">Estado</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -33,8 +33,14 @@
                         @foreach ($especialidades as $especialidad)
                             <tr>
                                 
-                                <td> {{ $especialidad->nombres }} </td>
+                                <td> {{ $especialidad->nombre }} </td>
                                 <td> {{ $especialidad->descripcion }} </td>
+                                @if ($especialidad->isActive=='1')
+                                <td style="color: green" > <b>Activo</b>  </td>
+                               @else
+                               <td style="color: rgb(129, 17, 17)"> <b>Inactivo</b> </td>
+                               @endif
+                                
                                 
 
                                 <td>

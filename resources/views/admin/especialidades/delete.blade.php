@@ -22,7 +22,7 @@
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Nombre</label> 
-                                    <input type="text" value="{{$especialidades->nombres}}" name="nombres" class="form-control" disabled>
+                                    <input type="text" value="{{$especialidades->nombre}}" name="nombres" class="form-control" disabled>
                                     @error('nombres')
                                         <small style="color: red"> {{$message}} </small>
                                     @enderror
@@ -37,6 +37,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            
                             
                         </div>
                         <br>

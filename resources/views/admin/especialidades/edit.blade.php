@@ -21,8 +21,8 @@
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Nombre</label> <b>*</b>
-                                    <input type="text" value="{{$especialidades->nombres}}" name="nombres" class="form-control" required>
-                                    @error('nombres')
+                                    <input type="text" value="{{$especialidades->nombre}}" name="nombre" class="form-control" required>
+                                    @error('nombre')
                                         <small style="color: red"> {{$message}} </small>
                                     @enderror
                                 </div>
@@ -32,6 +32,24 @@
                                     <label for="">Descripcion</label> <b>*</b>
                                     <input type="text" value="{{$especialidades->descripcion}}" name="descripcion" class="form-control" required>
                                     @error('descripcion')
+                                        <small style="color: red"> {{$message}} </small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form group">
+                                    <label for="">Estado</label><b>*</b>
+                                    
+                                    <div class="col-md-6">
+                                        <select class="js-example-basic-single" style="width: 50%" name="estado" required>
+                                        
+                                            <option value="1">Acitvo</option>
+                                            
+                                            <option value="0">Inactivo</option>
+                                           
+                                        </select>
+                                    </div>
+                                    @error('estado')
                                         <small style="color: red"> {{$message}} </small>
                                     @enderror
                                 </div>

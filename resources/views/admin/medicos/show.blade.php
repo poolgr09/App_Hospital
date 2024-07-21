@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row col-md-12">
-        <h3>Medico: {{$medicos->nombres}} {{$medicos->apellidos}}</h3>
+        <h3>Medico: {{$medicos->persona->nombres}} {{$medicos->persona->apellidos}}</h3>
     </div>
     <hr>
     <div class="row col-md-12">
@@ -18,38 +18,26 @@
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Cedula</label>
-                                    <p>{{$medicos->cedula}}</p>
+                                    <p>{{$medicos->persona->cedula}}</p>
                                    
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Nombres</label>
-                                    <p>{{$medicos->nombres}}</p>
+                                    <p>{{$medicos->persona->nombres}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Apellidos</label>
-                                    <p>{{$medicos->apellidos}}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form group">
-                                    <label for="">Genero</label>
-                                    <p>{{$medicos->genero}}</p>
+                                    <p>{{$medicos->persona->apellidos}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Celular</label>
-                                    <p>{{$medicos->celular}}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form group">
-                                    <label for="">Tipo de sangre</label>
-                                    <p>{{$medicos->tipo_sangre}}</p>
+                                    <p>{{$medicos->persona->celular}}</p>
                                 </div>
                             </div>
                         </div>
@@ -57,20 +45,29 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Fecha Nacimiento</label>
-                                    <p>{{$medicos->fecha_nacimiento}}</p>
+                                    <label for="">Especialidad</label>
+                                    @foreach ($medicos->especialidad as $especialidad)
+                                        <p> {{ $especialidad->nombre }} </p>
+                                    @endforeach
+                                    
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form group">
                                     <label for="">Dirección</label><b>*</b>
-                                    <p>{{$medicos->direccion}}</p>
+                                    <p>{{$medicos->persona->direccion}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form group">
+                                    <label for="">Edad</label><b>*</b>
+                                    <p>{{$medicos->persona->edad}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Email</label>
-                                    <p>{{$medicos->correo}}</p>
+                                    <p>{{$medicos->user->email}}</p>
                                 </div>
                             </div>
                         </div>

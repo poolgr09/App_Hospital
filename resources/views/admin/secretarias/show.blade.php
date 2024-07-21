@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row col-md-12">
-        <h3>Secretaria: {{$secretaria->nombres}} {{$secretaria->apellidos}}</h3>
+        <h3>Secretaria: {{$secretarias->persona->nombres}} {{$secretarias->persona->apellidos}}</h3>
     </div>
     <hr>
     <div class="row col-md-12">
@@ -18,26 +18,50 @@
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Cedula</label>
-                                    <p>{{$secretaria->cedula}}</p>
+                                    <p>{{$secretarias->persona->cedula}}</p>
                                    
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Nombres</label>
-                                    <p>{{$secretaria->nombres}}</p>
+                                    <p>{{$secretarias->persona->nombres}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Apellidos</label>
-                                    <p>{{$secretaria->apellidos}}</p>
+                                    <p>{{$secretarias->persona->apellidos}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form group">
+                                    <label for="">Genero</label>
+                                    <p>{{$secretarias->persona->genero}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Celular</label>
-                                    <p>{{$secretaria->celular}}</p>
+                                    <p>{{$secretarias->persona->celular}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form group">
+                                    <label for="">Tipo de sangre</label>
+                                    <p>{{$secretarias->persona->tipo_sangre}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form group">
+                                    <label for="">Nombre de usuario</label>
+                                    <p>{{$secretarias->user->name}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form group">
+                                    <label for="">Edad</label>
+                                    <p>{{$secretarias->persona->edad}}</p>
                                 </div>
                             </div>
                         </div>
@@ -46,19 +70,19 @@
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Fecha Nacimiento</label>
-                                    <p>{{$secretaria->fecha_nacimiento}}</p>
+                                    <p>{{$secretarias->persona->fecha_nacimiento}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form group">
-                                    <label for="">Dirección</label><b>*</b>
-                                    <p>{{$secretaria->direccion}}</p>
+                                    <label for="">Dirección</label>
+                                    <p>{{$secretarias->persona->direccion}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Email</label>
-                                    <p>{{$secretaria->user->email}}</p>
+                                    <p>{{$secretarias->user->email}}</p>
                                 </div>
                             </div>
                         </div>

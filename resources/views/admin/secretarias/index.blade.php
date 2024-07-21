@@ -36,12 +36,12 @@
                     <tbody>
                         @foreach ($secretarias as $secretaria)
                         <tr>
-                            <td> {{$secretaria->cedula}} </td>
-                            <td> {{$secretaria->nombres}} </td>
-                            <td> {{$secretaria->apellidos}} </td>
-                            <td> {{$secretaria->celular}} </td>
-                            <td> {{$secretaria->fecha_nacimiento}} </td>
-                            <td> {{$secretaria->direccion}} </td>
+                            <td> {{$secretaria->persona->cedula}} </td>
+                            <td> {{$secretaria->persona->nombres}} </td>
+                            <td> {{$secretaria->persona->apellidos}} </td>
+                            <td> {{$secretaria->persona->celular}} </td>
+                            <td> {{$secretaria->persona->fecha_nacimiento}} </td>
+                            <td> {{$secretaria->persona->direccion}} </td>
                             <td> {{$secretaria->user->email}} </td>
 
                             <td>

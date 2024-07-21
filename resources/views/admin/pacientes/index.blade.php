@@ -29,20 +29,20 @@
                         <th scope="col">Celular</th>
                         <th scope="col">Fecha de nacimiento</th>
                         <th scope="col">Dirección</th>
-                        <th scope="col">Correo</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach ($pacientes as $paciente)
                         <tr>
-                            <td> {{$paciente->cedula}} </td>
-                            <td> {{$paciente->nombres}} </td>
-                            <td> {{$paciente->apellidos}} </td>
-                            <td> {{$paciente->celular}} </td>
-                            <td> {{$paciente->fecha_nacimiento}} </td>
-                            <td> {{$paciente->direccion}} </td>
-                            <td> {{$paciente->correo}} </td>
+                            <td> {{$paciente->persona->cedula}} </td>
+                            <td> {{$paciente->persona->nombres}} </td>
+                            <td> {{$paciente->persona->apellidos}} </td>
+                            <td> {{$paciente->persona->celular}} </td>
+                            <td> {{$paciente->persona->fecha_nacimiento}} </td>
+                            <td> {{$paciente->persona->direccion}} </td>
+                            <td> {{$paciente->user->correo}} </td>
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row col-md-12">
-        <h3>Paciente: {{$pacientes->nombres}} {{$pacientes->apellidos}}</h3>
+        <h3>Paciente: {{$pacientes->persona->nombres}} {{$pacientes->persona->apellidos}}</h3>
     </div>
     <hr>
     <div class="row col-md-12">
@@ -18,38 +18,50 @@
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Cedula</label>
-                                    <p>{{$pacientes->cedula}}</p>
+                                    <p>{{$pacientes->persona->cedula}}</p>
                                    
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Nombres</label>
-                                    <p>{{$pacientes->nombres}}</p>
+                                    <p>{{$pacientes->persona->nombres}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Apellidos</label>
-                                    <p>{{$pacientes->apellidos}}</p>
+                                    <p>{{$pacientes->persona->apellidos}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Genero</label>
-                                    <p>{{$pacientes->genero}}</p>
+                                    <p>{{$pacientes->persona->genero}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Celular</label>
-                                    <p>{{$pacientes->celular}}</p>
+                                    <p>{{$pacientes->persona->celular}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Tipo de sangre</label>
-                                    <p>{{$pacientes->tipo_sangre}}</p>
+                                    <p>{{$pacientes->persona->tipo_sangre}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form group">
+                                    <label for="">Nombre de usuario</label>
+                                    <p>{{$pacientes->user->name}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form group">
+                                    <label for="">Edad</label>
+                                    <p>{{$pacientes->persona->edad}}</p>
                                 </div>
                             </div>
                         </div>
@@ -58,19 +70,19 @@
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Fecha Nacimiento</label>
-                                    <p>{{$pacientes->fecha_nacimiento}}</p>
+                                    <p>{{$pacientes->persona->fecha_nacimiento}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form group">
-                                    <label for="">Dirección</label><b>*</b>
-                                    <p>{{$pacientes->direccion}}</p>
+                                    <label for="">Dirección</label>
+                                    <p>{{$pacientes->persona->direccion}}</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Email</label>
-                                    <p>{{$pacientes->correo}}</p>
+                                    <p>{{$pacientes->user->email}}</p>
                                 </div>
                             </div>
                         </div>

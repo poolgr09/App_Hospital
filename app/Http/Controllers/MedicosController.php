@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Personas;
+use App\Models\User;
+use App\Models\Especialidades;
 use App\Models\Medicos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MedicosController extends Controller
 {
@@ -12,16 +16,18 @@ class MedicosController extends Controller
      */
     public function index()
     {
-        $medicos = Medicos::all();
+        $medicos = Medicos::with('user','persona','especialidad')->get();
         return view('admin.medicos.index', compact('medicos'));
+                
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() 
     {
-        return view('admin.medicos.create');
+        $especialidades = Especialidades::all();
+        return view('admin.medicos.create', compact('especialidades'));
     }
 
     /**
@@ -30,40 +36,55 @@ class MedicosController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cedula' => 'required|unique:medicos',
+            'cedula' => 'required|unique:personas',
             'nombres' => 'required',
             'apellidos' => 'required',
             'genero' => 'required',
-            'celular' => 'required',
             'fecha_nacimiento' => 'required',
             'direccion' => 'required',
-            'tipo_sangre' => 'required',
-            'correo' => 'required|max:250|unique:medicos',
+            'celular' => 'required',
+            'user_name' => 'required',
+            'email' => 'required|max:250|unique:users',
+            'password' => 'required|max:250|confirmed',
         ]);
     
-           $medicos = new Medicos();
-           $medicos->cedula = $request->cedula;
-           $medicos->nombres = $request->nombres;
-           $medicos->apellidos = $request->apellidos;
-           $medicos->genero = $request->genero;
-           $medicos->celular = $request->celular;
-           $medicos->fecha_nacimiento = $request->fecha_nacimiento ;
-           $medicos->direccion = $request->direccion;
-           $medicos->tipo_sangre = $request->tipo_sangre;
-           $medicos->correo = $request->correo;
+           $persona= new Personas();
+           $persona->cedula = $request->cedula;
+           $persona->nombres = $request->nombres;
+           $persona->apellidos = $request->apellidos;
+           $persona->edad = \Carbon\Carbon::parse($request->fecha_nacimiento)->age;
+           $persona->genero=$request->genero;
+           $persona->celular = $request->celular;
+           $persona->fecha_nacimiento = $request->fecha_nacimiento;
+           $persona->direccion = $request->direccion;
+           $persona->tipo_sangre = $request->tipo_sangre;
+           $persona->save();
+    
+           $usuario = new User();
+           $usuario->name = $request->user_name;
+           $usuario->email = $request->email;
+           $usuario->password = Hash::make($request['password']);
+           $usuario->save();
            
-           $medicos->save();
+           $medico = new Medicos();
+           $medico->user_id = $usuario->id;
+           $medico->persona_id = $persona->id;
+           $medico->save();
            
+           $medico-> especialidad()->attach($request->input('especialidades'));
+           
+           
+    
            return redirect()->route ('admin.medicos.index')->with('mensaje','¡Datos registrados con exitoso!');
-           
+    
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id) 
     {
-        $medicos = Medicos::findOrFail($id);
+        $medicos = Medicos::with('user','persona','especialidad')->findOrFail($id);
         return view('admin.medicos.show', compact('medicos'));
     }
 
@@ -72,8 +93,9 @@ class MedicosController extends Controller
      */
     public function edit($id)
     {
-        $medicos = Medicos::findOrFail($id);
-        return view('admin.medicos.edit', compact('medicos'));
+        $medicos = Medicos::with('user','persona','especialidad')->findOrFail($id);
+        $especialidades = Especialidades::all();
+        return view('admin.medicos.edit', compact('medicos','especialidades'));
     }
 
     /**
@@ -81,40 +103,55 @@ class MedicosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $medicos = Medicos::find($id);
+        $medico = Medicos::find($id);
+        $usuario = User::find($medico->user->id);
+        $persona = Personas::find($medico->persona->id);
        
-        $request -> validate([
-        'cedula' => 'required|unique:medicos,cedula,'.$medicos->id,
-        'nombres' => 'required',
-        'apellidos' => 'required',
-        'genero' => 'required',
-        'celular' => 'required',
-        'fecha_nacimiento' => 'required',
-        'direccion' => 'required',
-        'tipo_sangre' => 'required',
-        'correo' => 'required|max:250|unique:medicos,correo,'.$medicos->id,
-                  
+        $request->validate([
+            'cedula' => 'required|unique:personas,cedula,'.$medico->persona->id,
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'genero' => 'required',
+            'fecha_nacimiento' => 'required',
+            'direccion' => 'required',
+            'celular' => 'required',
+            'user_name' => 'required',
+            'email' => 'required|max:250|unique:users,email,'.$medico->user->id,
         ]);
-               
+                      
         
-    $medicos->cedula = $request->cedula;
-    $medicos->nombres = $request->nombres;
-    $medicos->apellidos = $request->apellidos;
-    $medicos->genero = $request->genero;
-    $medicos->celular = $request->celular;
-    $medicos->fecha_nacimiento = $request->fecha_nacimiento ;
-    $medicos->direccion = $request->direccion;
-    $medicos->tipo_sangre = $request->tipo_sangre;
-    $medicos->correo = $request->correo;
+           $persona->cedula = $request->cedula;
+           $persona->nombres = $request->nombres;
+           $persona->apellidos = $request->apellidos;
+           $persona->edad = \Carbon\Carbon::parse($request->fecha_nacimiento)->age;
+           $persona->genero=$request->genero;
+           $persona->celular = $request->celular;
+           $persona->fecha_nacimiento = $request->fecha_nacimiento;
+           $persona->direccion = $request->direccion;
+           $persona->tipo_sangre = $request->tipo_sangre;
+           $persona->save();
+
+          
+           $usuario->name = $request->user_name;
+           $usuario->email = $request->email;
+           $usuario->password = Hash::make($request['password']);
+           $usuario->save();
+
+          
+           $medico->user_id = $usuario->id;
+           $medico->persona_id = $persona->id;
+           $medico->save();
+           
+           $medico-> especialidad()->sync($request->input('especialidades'));
+           
+           
+           return redirect()->route ('admin.medicos.index')->with('mensaje','¡Datos actualizados con exitoso!');
     
-    $medicos->save();
- 
-    return redirect()->route ('admin.medicos.index')->with('mensaje','¡Datos registrados con exitoso!');
-    
-}
+    }
 
     public function confirmDelete($id){
-        $medico = Medicos::findOrFail($id);
+       
+        $medico = Medicos::with('user','persona','especialidad')-> findOrFail($id);
         return view('admin.medicos.delete', compact('medico'));
     }
 
@@ -124,7 +161,10 @@ class MedicosController extends Controller
      */
     public function destroy($id)
     {
-        Medicos::destroy($id);
+        $medico = Medicos::findOrFail($id);
+        $medico->especialidad()->detach($id);
+
+        $medico = Medicos::destroy($id);
         return redirect()->route ('admin.medicos.index')->with('mensaje','¡Datos eliminados con exitoso!');
     }
 }

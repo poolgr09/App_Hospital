@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row col-md-12">
-        <h3>Especialidad: {{ $especialidades->nombres }}</h3>
+        <h3>Especialidad: {{ $especialidades->nombre }}</h3>
     </div>
     <hr>
     <div class="row col-md-12">
@@ -18,13 +18,24 @@
                         <div class="col-md-3">
                             <div class="form group">
                                 <label for="">Nombre</label>
-                                <p>{{ $especialidades->nombres }}</p>
+                                <p>{{ $especialidades->nombre }}</p>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form group">
                                 <label for="">Descripcion</label>
                                 <p>{{ $especialidades->descripcion }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form group">
+                                <label for="">Estado</label>
+                                @if ($especialidades->isActive=='1')
+                                 <p>Activo</p>
+                                @else
+                                <p>Inactivo</p>
+                                @endif
+                                
                             </div>
                         </div>
 

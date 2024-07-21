@@ -11,7 +11,6 @@
     <style>
         body {
             background-image: url("inicio.jpg");
-
             background-size: cover;
             background-repeat: no-repeat;
             margin: 0;
@@ -30,7 +29,7 @@
                             @auth
                                 <div class="row md-auto btn btn-info">
                         
-                                    <a href="{{ url('/home') }}">Home</a>
+                                    <a href="{{ url('/index') }}">Home</a>
                                 </div>
                             @else
                                 <div class="row col-md-2 float-right">

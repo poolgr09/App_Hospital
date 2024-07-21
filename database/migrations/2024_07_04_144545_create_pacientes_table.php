@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pacientes', function (Blueprint $table) {
-            $table->id();
-            $table->string('cedula')->unique();
-            $table->string('nombres', length:100);
-            $table->string('apellidos', length:100);
-            $table->string('genero', length:10);
-            $table->string('celular', length:20);
-            $table->string('fecha_nacimiento', length:100);
-            $table->string('direccion', length:255);
-            $table->string('tipo_sangre', length:255);
-            $table->string('correo', length:100)->unique();
             
+            $table->id();
+                        
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table->unsignedBigInteger('persona_id');            
+            $table->foreign('persona_id')->references('id')->on('personas')->onDelete('cascade')->onUpdate('cascade');
+
+           
+
             $table->timestamps();
         });
     }

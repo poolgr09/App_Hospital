@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="row col-md-12 bg-danger row justify-content-center align-items-center">
-        <h3>Eliminar datos: {{$medico->nombres}} {{$medico->apellidos}}</h3>
+        <h3>Eliminar datos: {{$medico->persona->nombres}} {{$medico->persona->apellidos}}</h3>
     </div>
     <hr>
     <div class="row col-md-12">
@@ -21,37 +21,29 @@
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Cedula</label>
-                                    <input type="text" value="{{$medico->cedula}}" name="cedula" class="form-control" disabled>
-                                    @error('cedula')
-                                        <small style="color: red"> {{$message}} </small>
-                                    @enderror
+                                    <input type="text" value="{{$medico->persona->cedula}}" name="cedula" class="form-control" disabled>
+                                   
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Nombres</label> 
-                                    <input type="text" value="{{$medico->nombres}}" name="nombres" class="form-control" disabled>
-                                    @error('nombres')
-                                        <small style="color: red"> {{$message}} </small>
-                                    @enderror
+                                    <input type="text" value="{{$medico->persona->nombres}}" name="nombres" class="form-control" disabled>
+                                   
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Apellidos</label> 
-                                    <input type="text" value="{{$medico->apellidos}}" name="apellidos" class="form-control" disabled>
-                                    @error('apellidos')
-                                        <small style="color: red"> {{$message}} </small>
-                                    @enderror
+                                    <input type="text" value="{{$medico->persona->apellidos}}" name="apellidos" class="form-control" disabled>
+                                   
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
                                     <label for="">Celular</label> 
-                                    <input type="text" value="{{$medico->celular}}" name="celular" class="form-control" disabled>
-                                    @error('celular')
-                                        <small style="color: red"> {{$message}} </small>
-                                    @enderror
+                                    <input type="text" value="{{$medico->persona->celular}}" name="celular" class="form-control" disabled>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -59,20 +51,22 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Fecha Nacimiento</label>
-                                    <input type="date" value="{{$medico->fecha_nacimiento}}" name="fecha_nacimiento" class="form-control" disabled>
-                                    @error('fecha_nacimiento')
-                                        <small style="color: red"> {{$message}} </small>
-                                    @enderror
+                                    <label for="">Edad</label>
+                                    <input type="date" value="{{$medico->persona->edad}}" name="edad" class="form-control" disabled>
+                                    
                                 </div>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <div class="form group">
                                     <label for="">Dirección</label>
-                                    <input type="address" value="{{$medico->direccion}}" name="direccion" class="form-control" disabled>
-                                    @error('direccion')
-                                        <small style="color: red"> {{$message}} </small>
-                                    @enderror
+                                    <input type="address" value="{{$medico->persona->direccion}}" name="direccion" class="form-control" disabled>
+                                   
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form group">
+                                    <label for="">Genero</label>
+                                    <p>{{$medico->persona->genero}}</p>
                                 </div>
                             </div>
                         </div>
@@ -81,10 +75,8 @@
                             <div class="col-md-4">
                                 <div class="form group">
                                     <label for="">Email</label>
-                                    <input type="email" value="{{$medico->correo}}" name="email" class="form-control" disabled>
-                                    @error('correo')
-                                        <small style="color: red"> {{$message}} </small>
-                                    @enderror
+                                    <input type="email" value="{{$medico->user->email}}" name="email" class="form-control" disabled>
+                                    
                                 </div>
                             </div>
                         </div>

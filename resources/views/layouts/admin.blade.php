@@ -17,10 +17,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{url('dist/css/adminlte.min.css')}}">
   <!--Iconos bootstrap-->
   <link rel="stylesheet" href="{{url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css')}}">
+
+  <link rel="stylesheet" href="{{url('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css')}}">
+
+
+
   <!--sweetalert2-->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{{url('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
   <!-- jQuery -->
   <script src="{{url('plugins/jquery/jquery.min.js')}}"></script>
+
+
 
 
   <!--datatable-->
@@ -65,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Brand Logo -->
       <div class="brand-link">
         <img src="{{url('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light text-white">SYS_MED</span>
+        <span class="brand-text font-weight-light text-white">Hospital Isidro Ayora</span>
       </div>
 
       <!-- Sidebar -->
@@ -87,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
                 <i class="nav-icon fas bi bi-people-fill"></i>
                 <p>
-                  Usuarios 
+                  Usuarios
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -95,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item">
                   <a href="{{url('admin/usuarios/create')}}" class="nav-link active bg-lightblue">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Creacion de usuarios</p>
+                    <p>Creación de usuarios</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -112,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
                 <i class="nav-icon fas bi bi-person-vcard"></i>
                 <p>
-                  Secretarias 
+                  Secretarias
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -120,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item">
                   <a href="{{url('admin/secretarias/create')}}" class="nav-link active bg-lightblue">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Creacion de secretaria</p>
+                    <p>Creación de secretaria</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -137,7 +144,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
                 <i class="nav-icon fas bi bi-person-bounding-box"></i>
                 <p>
-                  Pacientes 
+                  Pacientes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -145,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item">
                   <a href="{{url('admin/pacientes/create')}}" class="nav-link active bg-lightblue">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Creacion de paciente</p>
+                    <p>Creación de paciente</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -162,7 +169,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
                 <i class="nav-icon fas bi bi-heart-pulse-fill"></i>
                 <p>
-                  Médicos 
+                  Médicos
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -170,7 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item">
                   <a href="{{url('admin/medicos/create')}}" class="nav-link active bg-lightblue">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Creacion de médico</p>
+                    <p>Creación de médico</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -187,7 +194,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
                 <i class="nav-icon fas bi bi-clipboard2-pulse"></i>
                 <p>
-                  Especialidades 
+                  Especialidades
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -195,7 +202,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item">
                   <a href="{{url('admin/especialidades/create')}}" class="nav-link active bg-lightblue">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Creacion de especialidad</p>
+                    <p>Creación de especialidad</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -206,6 +213,93 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
               </ul>
             </li>
+
+            <!--modulo horarios-->
+            <li class="nav-item">
+              <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
+                <i class="nav-icon fas bi bi-calendar2-date"></i>
+                <p>
+                  Horarios
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('admin/horarios/create')}}" class="nav-link active bg-lightblue">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Creación de horarios</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('admin/horarios')}}" class="nav-link active bg-lightblue">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Listar horarios</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+              <!--modulo cita-->
+              <li class="nav-item">
+                  <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
+                      <i class="nav-icon fas bi bi-journal-medical"></i>
+                      <p>
+                          Cita Médica
+                          <i class="right fas fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="{{url('admin/citas/create')}}" class="nav-link active bg-lightblue">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Creación de cita</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{url('admin/citas')}}" class="nav-link active bg-lightblue">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Listar consultorios</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+
+              <!--modulo consultorios-->
+              <li class="nav-item">
+                  <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
+                      <i class="nav-icon fas bi bi-door-open"></i>
+                      <p>
+                          Consultorios
+                          <i class="right fas fa-angle-left"></i>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="{{url('admin/consultorios/create')}}" class="nav-link active bg-lightblue">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Creación de consultorio</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{url('admin/consultorios')}}" class="nav-link active bg-lightblue">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Listar consultorios</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{url('asignar')}}" class="nav-link active bg-lightblue">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Asignar consultorio</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{url('reporte')}}" class="nav-link active bg-lightblue">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Reporte de consultorios</p>
+                        </a>
+                    </li>
+                  </ul>
+              </li>
 
             <li class="nav-item">
               <a href="{{ route('logout') }}" class="nav-link btn btn-outline-danger" style="background-color: rgb(199, 85, 85)" onclick="event.preventDefault();
@@ -219,13 +313,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 @csrf
               </form>
             </li>
-           
+
         </nav>
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
     </aside>
-    
+
     <div class="content-wrapper">
       <br>
       <div class="content">
@@ -272,5 +366,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- AdminLTE App -->
 <script src="{{url('dist/js/adminlte.min.js')}}"></script>
+
+<script src="{{url('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js')}}"></script>
+  <script>
+    $(document).ready(function() {
+      $('.js-example-basic-multiple').select2({theme: "classic"});
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2({theme: "classic"});
+    });
+  </script>
+
+  @yield('scripts')
+
+
+
 </body>
 </html>

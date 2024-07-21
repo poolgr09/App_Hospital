@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Especialidades;
+use App\Models\Medicos;
 use Illuminate\Http\Request;
+use Monolog\Level;
+use PhpParser\Node\Stmt\ElseIf_;
 
 class EspecialidadesController extends Controller
 {
@@ -13,6 +16,8 @@ class EspecialidadesController extends Controller
     public function index()
     {
         $especialidades = Especialidades::all();
+
+                      
         return view('admin.especialidades.index', compact('especialidades'));
     }
 
@@ -21,6 +26,7 @@ class EspecialidadesController extends Controller
      */
     public function create()
     {
+        
         return view('admin.especialidades.create');
     }
 
@@ -30,13 +36,16 @@ class EspecialidadesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombres' => 'required',
+            'nombre' => 'required',
             'descripcion' => 'required',
+            'estado' => 'required',
         ]);
-    
+            
+        
            $especialidades = new Especialidades();
-           $especialidades->nombres = $request->nombres;
+           $especialidades->nombre = $request->nombre;
            $especialidades->descripcion = $request->descripcion;
+           $especialidades->isActive = $request->estado;
                      
            $especialidades->save();
            
@@ -49,6 +58,8 @@ class EspecialidadesController extends Controller
     public function show($id)
     {
         $especialidades = Especialidades::findOrFail($id);
+        
+        
         return view('admin.especialidades.show', compact('especialidades'));
     }
 
@@ -67,16 +78,18 @@ class EspecialidadesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $especialidades = Especialidades::find($id);
+        $especialidades = Especialidades::findOrFail($id);
        
         $request->validate([
-            'nombres' => 'required|unique:especialidades,nombres,'.$especialidades->id,
+            'nombre' => 'required|unique:especialidades,nombre,'.$especialidades->id,
             'descripcion' => 'required',
+            'estado' => 'required',
         ]);
     
            
-           $especialidades->nombres = $request->nombres;
+           $especialidades->nombre = $request->nombre;
            $especialidades->descripcion = $request->descripcion;
+           $especialidades->isActive = $request->estado;
                      
            $especialidades->save();
            
@@ -97,5 +110,13 @@ class EspecialidadesController extends Controller
     {
         Especialidades::destroy($id);
         return redirect()->route ('admin.especialidades.index')->with('mensaje','¡Datos eliminados con exitoso!');
+    }
+
+    public function byProyect($id){
+
+        $medicos = Medicos::find($id);
+        $especialidades = $medicos->especialidad;
+        return $especialidades; 
+    
     }
 }

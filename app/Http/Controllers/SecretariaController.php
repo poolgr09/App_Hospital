@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Personas;
 use App\Models\Secretaria;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,11 +12,12 @@ use Illuminate\Support\Facades\Hash;
 class SecretariaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      */
+    
     public function index()
     {
-       $secretarias = Secretaria::with('user')->get();
+       $secretarias = Secretaria::with('user','persona')->get();
         return view('admin.secretarias.index', compact('secretarias'));
     }
 
@@ -34,30 +36,40 @@ class SecretariaController extends Controller
     {
        
         $request->validate([
-        'cedula' => 'required|unique:secretarias',
+        'cedula' => 'numeric|required|unique:personas',
         'nombres' => 'required',
         'apellidos' => 'required',
-        'celular' => 'required',
+        'genero' => 'required',
         'fecha_nacimiento' => 'required',
         'direccion' => 'required',
+        'celular' => 'numeric|required',
+        'user_name' => 'required',
+        'tipo_sangre' => 'required',
         'email' => 'required|max:250|unique:users',
         'password' => 'required|max:250|confirmed',
        ]);
 
+       $persona= new Personas();
+       $persona->cedula = $request->cedula;
+       $persona->nombres = $request->nombres;
+       $persona->apellidos = $request->apellidos;
+       $persona->edad = \Carbon\Carbon::parse($request->fecha_nacimiento)->age;
+       $persona->genero=$request->genero;
+       $persona->celular = $request->celular;
+       $persona->fecha_nacimiento = $request->fecha_nacimiento;
+       $persona->direccion = $request->direccion;
+       $persona->tipo_sangre = $request->tipo_sangre;
+       $persona->save();
+
        $usuario = new User();
-       $usuario->name = $request->nombres;
+       $usuario->name = $request->user_name;
        $usuario->email = $request->email;
        $usuario->password = Hash::make($request['password']);
        $usuario->save();
 
        $secretaria = new Secretaria();
        $secretaria->user_id = $usuario->id;
-       $secretaria->cedula = $request->cedula;
-       $secretaria->nombres = $request->nombres;
-       $secretaria->apellidos = $request->apellidos;
-       $secretaria->celular = $request->celular;
-       $secretaria->fecha_nacimiento = $request->fecha_nacimiento ;
-       $secretaria->direccion = $request->direccion;
+       $secretaria->persona_id = $persona->id;
        $secretaria->save();
 
        return redirect()->route ('admin.secretarias.index')->with('mensaje','¡Datos registrados con exitoso!');
@@ -69,8 +81,8 @@ class SecretariaController extends Controller
      */
     public function show($id)
     {
-        $secretaria = Secretaria::with('user')->findOrFail($id);
-        return view('admin.secretarias.show', compact('secretaria'));
+        $secretarias = Secretaria::with('user','persona')-> findOrFail($id);
+        return view('admin.secretarias.show', compact('secretarias'));
     }
 
     /**
@@ -78,7 +90,7 @@ class SecretariaController extends Controller
      */
     public function edit($id)
     {
-        $secretaria = Secretaria::with('user')->findOrFail($id);
+        $secretaria = Secretaria::with('user','persona')-> findOrFail($id);
         return view('admin.secretarias.edit', compact('secretaria'));
     }
 
@@ -87,35 +99,44 @@ class SecretariaController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $secretaria = Secretaria::find($id);
-        
-
+            $secretaria = Secretaria::find($id);
+            $usuario = User::find($secretaria->user->id);
+            $persona = Personas::find($secretaria->persona->id);
+            
             $request -> validate([
-            'cedula' => 'required|unique:secretarias,cedula,'.$secretaria->id,
+           'cedula' => 'numeric|required|unique:personas,cedula,'.$secretaria->persona->id,
             'nombres' => 'required',
             'apellidos' => 'required',
-            'celular' => 'required',
+            'genero' => 'required',
             'fecha_nacimiento' => 'required',
             'direccion' => 'required',
+            'celular' => 'numeric|required',
+            'user_name' => 'required',
+            'tipo_sangre' => 'required',
             'email' => 'required|max:250|unique:users,email,'.$secretaria->user->id,
+            
             ]);
 
-        $secretaria->cedula = $request->cedula;
-        $secretaria->nombres = $request->nombres;
-        $secretaria->apellidos = $request->apellidos;
-        $secretaria->celular = $request->celular;
-        $secretaria->fecha_nacimiento = $request->fecha_nacimiento;
-        $secretaria->direccion = $request->direccion;
-        $secretaria->save();
-        
-        $usuario = User::find($secretaria->user->id);
+            $persona->cedula = $request->cedula;
+            $persona->nombres = $request->nombres;
+            $persona->apellidos = $request->apellidos;
+            $persona->edad = \Carbon\Carbon::parse($request->fecha_nacimiento)->age;
+            $persona->genero=$request->genero;
+            $persona->celular = $request->celular;
+            $persona->fecha_nacimiento = $request->fecha_nacimiento;
+            $persona->direccion = $request->direccion;
+            $persona->tipo_sangre = $request->tipo_sangre;
+            $persona->save();
+         
+            $usuario->email = $request->email;
+            $usuario->name = $request->user_name;
+            $usuario->save();
+     
+            $secretaria->user_id = $usuario->id;
+            $secretaria->persona_id = $persona->id;
+            $secretaria->save();
 
-        $usuario->name = $request->nombres;
-        $usuario->email = $request->email;
-        $usuario->save();
-
-        return redirect()->route ('admin.secretarias.index')->with('mensaje','¡Datos registrados con exitoso!');
+            return redirect()->route ('admin.secretarias.index')->with('mensaje','¡Datos registrados con exitoso!');
     }
 
     /**
@@ -123,16 +144,20 @@ class SecretariaController extends Controller
      */
 
      public function confirmDelete($id){
-        $secretaria = Secretaria::with('user')->findOrFail($id);
+        $secretaria = Secretaria::with('user','persona')-> findOrFail($id);
         return view('admin.secretarias.delete', compact('secretaria'));
         
     }
 
 
-    public function destroy($id)
+    public function destroy($id) 
     {
         $secretaria = Secretaria::find($id);
-        
+
+        //eliminar persona asociada
+        $persona = $secretaria->persona;
+        $persona ->delete();
+
         //eliminar user asociado
         $user = $secretaria->user;
         $user->delete();

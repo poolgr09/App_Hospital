@@ -44,6 +44,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function personas(){
+        return $this->hasOne(Personas::class);
+    }
+
     public function secretarias(){
         return $this->hasMany(Secretaria::class);
     }
@@ -52,4 +56,7 @@ class User extends Authenticatable
         return $this->hasMany(Medicos::class);
     }
     
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
 }

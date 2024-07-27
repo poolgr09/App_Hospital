@@ -27,6 +27,11 @@ class PacientesController extends Controller
         return view('admin.pacientes.create');
     }
 
+    public function create_reg()
+    {
+        return view('admin.pacientes.create_reg');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -44,10 +49,11 @@ class PacientesController extends Controller
             'user_name' => 'required',
             'tipo_sangre' => 'required',
             'email' => 'required|max:250|unique:users',
-            'password' => 'required|max:250|confirmed',
+            'password' => 'required|max:250|confirmed', 
            ]);
 
            $persona= new Personas();
+           $usuario = new User();
            $persona->cedula = $request->cedula;
            $persona->nombres = $request->nombres;
            $persona->apellidos = $request->apellidos;
@@ -57,20 +63,32 @@ class PacientesController extends Controller
            $persona->fecha_nacimiento = $request->fecha_nacimiento;
            $persona->direccion = $request->direccion;
            $persona->tipo_sangre = $request->tipo_sangre;
-           $persona->save();
-    
-           $usuario = new User();
+           
+           
+           
            $usuario->name = $request->user_name;
            $usuario->email = $request->email;
            $usuario->password = Hash::make($request['password']);
            $usuario->save();
+          
+           
+          
 
            $paciente = new Pacientes();
+           $persona->user_id = $usuario->id;
+           $persona->save();
            $paciente->user_id = $usuario->id;
            $paciente->persona_id = $persona->id;
            $paciente->save();
+
+           $usuario->assignRole('paciente');
  
-       return redirect()->route ('admin.pacientes.index')->with('mensaje','¡Datos registrados con exitoso!');
+        if  (($request->bandera)=='1') {
+            return redirect()->route ('login');
+        } else {
+            return redirect()->route ('admin.pacientes.index')->with('mensaje','¡Datos registrados con exitoso!');
+        }
+        
 
     }
 
@@ -124,12 +142,14 @@ class PacientesController extends Controller
             $persona->fecha_nacimiento = $request->fecha_nacimiento;
             $persona->direccion = $request->direccion;
             $persona->tipo_sangre = $request->tipo_sangre;
-            $persona->save();
+            
          
             $usuario->email = $request->email;
             $usuario->name = $request->user_name;
             $usuario->save();
-     
+            
+            $persona->user_id = $usuario->id;
+            $persona->save();
             $paciente->user_id = $usuario->id;
             $paciente->persona_id = $persona->id;
             $paciente->save();

@@ -10,12 +10,12 @@ class Pacientes extends Model
 {
     use HasFactory;
     protected $guard_name = 'web';
-    
+
     public function persona(){
         return $this->belongsTo(Personas::class);
     }
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class); 
     }
 }

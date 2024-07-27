@@ -25,7 +25,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center bg-lightblue">
-                    <a href="{{url('/')}}" class="h1"><b>Hospital Isidro Ayora</a>
+                    <a href="{{url('/')}}" class="h1"> Hospital Isidro Ayora </a>
                 </div>
 
                 <div class="card-body">
@@ -78,6 +78,11 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
+                                <div class="row justify-content-center col-md-0">
+                                    <button type="submit" class="btn btn-primary">
+                                        Iniciar Sesión
+                                    </button>
+                                </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -85,20 +90,22 @@
                                         Recuerdame
                                     </label>
                                 </div>
+
                             </div>
                         </div>
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Iniciar Sesión
-                                </button>
+
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         ¿Olvidaste tu contraseña?
                                     </a>
                                 @endif
+                                <a class="btn btn-link" href="{{ url('create_reg') }}">
+                                    Registrarse
+                                </a>
                             </div>
                         </div>
                     </form>

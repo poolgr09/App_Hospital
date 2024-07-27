@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Descripcion</label> <b>*</b>
+                                    <label for="">Descripción</label> <b>*</b>
                                     <input type="text" value="{{ old('descripcion') }}" name="descripcion"
                                         class="form-control" required>
                                     @error('descripcion')

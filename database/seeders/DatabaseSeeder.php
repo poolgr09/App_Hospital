@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $medico = Role::create(['name'=>'medico']);
         $paciente = Role::create(['name'=>'paciente']);
 
-        
+
         User::create([
             'name'=>'Administrador',
             'email'=>'admin@admin.com',
@@ -46,21 +46,20 @@ class DatabaseSeeder extends Seeder
         ])->assignRole('secretaria');
 
         User::create([
-            'name'=>'Doctor1',
-            'email'=>'doctor1@admin.com',
+            'name'=>'Doctor',
+            'email'=>'doctor@admin.com',
             'password'=>Hash::make(value:'12345678')
         ])->assignRole('medico');
 
         User::create([
-            'name'=>'Paciente1',
-            'email'=>'paciente1@admin.com',
+            'name'=>'Paciente',
+            'email'=>'paciente@admin.com',
             'password'=>Hash::make(value:'12345678')
         ])->assignRole('paciente');
 
-        
 
-        
         Permission::create(['name'=> 'admin.index']);
+        
 
         //rutas admin usuarios
         Permission::create(['name'=> 'admin.usuarios.index'])->syncRoles([$admin]);
@@ -70,7 +69,7 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name'=> 'admin.usuarios.edit'])->syncRoles([$admin]);
         Permission::create(['name'=> 'admin.usuarios.update'])->syncRoles([$admin]);
         Permission::create(['name'=> 'admin.usuarios.confirmDelete'])->syncRoles([$admin]);
-        Permission::create(['name'=> 'admin.usuarios.destroy'])->syncRoles([$admin]);
+        Permission::create(['name'=> 'admin.usuarios.destroy'])->syncRoles([$admin]); 
 
          //rutas admin secretarias
         Permission::create(['name'=> 'admin.secretarias.index'])->syncRoles([$admin]);
@@ -79,23 +78,26 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name'=> 'admin.secretarias.show'])->syncRoles([$admin]);
         Permission::create(['name'=> 'admin.secretarias.edit'])->syncRoles([$admin]);
         Permission::create(['name'=> 'admin.secretarias.update'])->syncRoles([$admin]);
-        Permission::create(['name'=> 'admin.secretarias.confirmDelete'])->syncRoles([$admin]);
+        Permission::create(['name'=> 'admin.secretarias.confirmDelete'])->syncRoles([$admin]); 
         Permission::create(['name'=> 'admin.secretarias.destroy'])->syncRoles([$admin]);
 
          //rutas admin medicos
-         Permission::create(['name'=> 'admin.medicos.index'])->syncRoles([$admin]);
+         Permission::create(['name'=> 'admin.medicos.index'])->syncRoles([$admin, $paciente]);
          Permission::create(['name'=> 'admin.medicos.create'])->syncRoles([$admin]);
          Permission::create(['name'=> 'admin.medicos.store'])->syncRoles([$admin]);
-         Permission::create(['name'=> 'admin.medicos.show'])->syncRoles([$admin]);
+         Permission::create(['name'=> 'admin.medicos.show'])->syncRoles([$admin, $paciente]);
          Permission::create(['name'=> 'admin.medicos.edit'])->syncRoles([$admin]);
          Permission::create(['name'=> 'admin.medicos.update'])->syncRoles([$admin]);
          Permission::create(['name'=> 'admin.medicos.confirmDelete'])->syncRoles([$admin]);
          Permission::create(['name'=> 'admin.medicos.destroy'])->syncRoles([$admin]);
-        
+         Permission::create(['name'=> 'admin.vercitas'])->syncRoles([$admin,$medico]);
+         
+
          //rutas admin pacientes
          Permission::create(['name'=> 'admin.pacientes.index'])->syncRoles([$admin,$secretaria]);
          Permission::create(['name'=> 'admin.pacientes.create'])->syncRoles([$admin,$secretaria]);
-         Permission::create(['name'=> 'admin.pacientes.store'])->syncRoles([$admin,$secretaria]);
+         Permission::create(['name'=> 'admin.pacientes.store']);
+        //  ->syncRoles([$admin,$secretaria]);
          Permission::create(['name'=> 'admin.pacientes.show'])->syncRoles([$admin,$secretaria]);
          Permission::create(['name'=> 'admin.pacientes.edit'])->syncRoles([$admin,$secretaria]);
          Permission::create(['name'=> 'admin.pacientes.update'])->syncRoles([$admin,$secretaria]);
@@ -104,10 +106,10 @@ class DatabaseSeeder extends Seeder
 
 
          //rutas admin usuariosespecialidades
-         Permission::create(['name'=> 'admin.especialidades.index'])->syncRoles([$admin,$secretaria]);
+         Permission::create(['name'=> 'admin.especialidades.index'])->syncRoles([$admin,$secretaria, $paciente]);
          Permission::create(['name'=> 'admin.especialidades.create'])->syncRoles([$admin,$secretaria]);
          Permission::create(['name'=> 'admin.especialidades.store'])->syncRoles([$admin,$secretaria]);
-         Permission::create(['name'=> 'admin.especialidades.show'])->syncRoles([$admin,$secretaria]);
+         Permission::create(['name'=> 'admin.especialidades.show'])->syncRoles([$admin,$secretaria, $paciente]);
          Permission::create(['name'=> 'admin.especialidades.edit'])->syncRoles([$admin,$secretaria]);
          Permission::create(['name'=> 'admin.especialidades.update'])->syncRoles([$admin,$secretaria]);
          Permission::create(['name'=> 'admin.especialidades.confirmDelete'])->syncRoles([$admin,$secretaria]);
@@ -136,6 +138,6 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name'=> 'admin.consultorios.asignar'])->syncRoles([$admin,$secretaria]);
         Permission::create(['name'=> 'admin.consultorios.guardarAsignacion'])->syncRoles([$admin,$secretaria]);
         Permission::create(['name'=> 'admin.consultorios.reporte'])->syncRoles([$admin,$secretaria]);
-        
+
     }
 }

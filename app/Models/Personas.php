@@ -16,4 +16,8 @@ class Personas extends Model
     public function medicos(){
         return $this->hasMany(Medicos::class);
     }
+
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }

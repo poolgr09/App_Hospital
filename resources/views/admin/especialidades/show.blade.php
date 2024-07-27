@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form group">
-                                <label for="">Descripcion</label>
+                                <label for="">Descripción</label>
                                 <p>{{ $especialidades->descripcion }}</p>
                             </div>
                         </div>

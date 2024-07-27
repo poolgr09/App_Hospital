@@ -1,19 +1,22 @@
 @extends('layouts.admin')
 
 @section('content')
-    
+
     <div class="row col-md-12">
         <div class="card card-primary col-md-12">
             <div class="card-header bg-lightblue">
-                    <h3 class="card-title">Medicos Registrados</h3>
+                    <h3 class="card-title">Médicos Registrados</h3>
+                @can('admin.medicos.edit')
                 <div class="card-tools">
-                    <a href="{{url('admin/medicos/create')}}" class="btn btn-secondary bg-white">
-                        Registro nuevo 
-                    </a>
-                </div>
-            
+                  <a href="{{url('admin/medicos/create')}}" class="btn btn-secondary bg-white">
+                      Registro nuevo
+                  </a>
+              </div>
+                @endcan    
+                
+
             </div>
-            
+
             <div class="card-body" style="display: block;">
                 @if ($message = Session::get('mensaje'))
                     <div class="alert alert-success">
@@ -23,14 +26,14 @@
                 <table id="example1" class="table table-striped table-sm table-hover">
                     <thead style="background-color: rgb(150, 158, 165)">
                       <tr>
-                        <th scope="col">Cedula</th>
+                        <th scope="col">Cédula</th>
                         <th scope="col">Nombres</th>
                         <th scope="col">Apellidos</th>
                         <th scope="col">Celular</th>
                         <th scope="col">Especialidad</th>
                         <th scope="col">Dirección</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Acciones</th> 
+                        <th scope="col">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -45,7 +48,7 @@
                                   {{ $especialidad->nombre }}<br>
                               @endforeach
                             </td>
-                            
+
                             <td> {{$medico->persona->direccion}} </td>
                             <td> {{$medico->user->email}} </td>
 
@@ -78,9 +81,9 @@
                     });
                   </script>
             </div>
-            
+
             </div>
-        
+
         </div>
 
     @endsection

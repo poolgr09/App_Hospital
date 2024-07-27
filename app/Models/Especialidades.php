@@ -24,4 +24,8 @@ class Especialidades extends Model
         return $this->hasMany(Consultorio::class);
     }
 
+    public function event(){
+        return $this->hasMany(Event::class);
+    }
+
 }

@@ -27,7 +27,7 @@
                             <th scope="col">Fecha</th>
                             <th scope="col">Hora Inicio</th>
                             <th scope="col">Hora Fin</th>
-                            <th scope="col">Medico</th>
+                            <th scope="col">Médico</th>
                             <th scope="col">Especialidad</th>
                             <th scope="col">Acciones</th>
                         </tr>

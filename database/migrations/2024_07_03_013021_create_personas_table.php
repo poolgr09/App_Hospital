@@ -22,7 +22,10 @@ return new class extends Migration
             $table->string('celular', length:20);
             $table->string('fecha_nacimiento', length:100);
             $table->string('direccion', length:255);
-            $table->string('tipo_sangre', length:255);
+            $table->string('tipo_sangre', length:255); 
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

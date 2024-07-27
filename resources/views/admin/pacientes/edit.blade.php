@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Cedula</label> <b>*</b>
+                                    <label for="">Cédula</label> <b>*</b>
                                     <input type="text" value="{{$paciente->persona->cedula}}" name="cedula" class="form-control" required>
                                     @error('cedula')
                                         <small style="color: red"> {{$message}} </small>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Genero</label><b>*</b>
+                                    <label for="">Género</label><b>*</b>
                                     
                                     <select name="genero" id="" class="form-control">
                                         <option value="{{$paciente->persona->genero}}">{{$paciente->persona->genero}}</option>

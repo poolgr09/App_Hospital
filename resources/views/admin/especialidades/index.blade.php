@@ -5,11 +5,14 @@
         <div class="card card-primary col-md-12">
             <div class="card-header bg-lightblue">
                 <h3 class="card-title">Especialidades registradas</h3>
+                @can('admin.medicos.edit')
                 <div class="card-tools">
                     <a href="{{ url('admin/especialidades/create') }}" class="btn btn-secondary bg-white">
                         Registro nuevo
                     </a>
                 </div>
+                @endcan
+                
 
             </div>
 
@@ -24,7 +27,7 @@
                         <tr>
                             
                             <th scope="col">Nombre</th>
-                            <th scope="col">Descripcion</th>
+                            <th scope="col">Descripción</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Acciones</th>
                         </tr>

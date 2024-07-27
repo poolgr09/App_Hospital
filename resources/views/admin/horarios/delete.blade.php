@@ -21,7 +21,7 @@
 
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Dia</label>
+                                    <label for="">Día</label>
                                     <input type="text" value="{{$horarios->dia}}" name="dia" class="form-control" disabled>
                                     @error('dia')
                                         <small style="color: red"> {{$message}} </small>

@@ -26,7 +26,7 @@ background-attachment: fixed">
 
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{url('login')}}" class="h1"><b>Hospital Isidro Ayora</a>
+                <a href="{{url('login')}}" class="h1">Hospital Isidro Ayora</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg"><b>Registro de usuario</b></p>

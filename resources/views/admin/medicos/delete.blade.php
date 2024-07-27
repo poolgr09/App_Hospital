@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Cedula</label>
+                                    <label for="">Cédula</label>
                                     <input type="text" value="{{$medico->persona->cedula}}" name="cedula" class="form-control" disabled>
                                    
                                 </div>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Genero</label>
+                                    <label for="">Género</label>
                                     <p>{{$medico->persona->genero}}</p>
                                 </div>
                             </div>

@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form group">
-                                <label for="">Dia</label>
+                                <label for="">Día</label>
                                 <p>{{ $horarios->dia }}</p>
                             </div>
                         </div>

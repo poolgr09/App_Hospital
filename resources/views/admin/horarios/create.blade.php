@@ -19,9 +19,9 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form group">
-                                        <label for="">Medicos</label><b>*</b>
+                                        <label for="">Médicos</label><b>*</b>
                                         <select class="form-control js-example-basic-single" name="medico" id="select-medico" required>
-                                            <option value="">Selecccione una opcion</option>
+                                            <option value="">Selecccione una opción</option>
                                             @foreach ($medicos as $medico)
                                                 <option value="{{$medico->id}}">
                                                     {{$medico->persona->nombres." ".$medico->persona->apellidos}}
@@ -49,7 +49,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form group">
-                                        <label for="">Dia</label> <b>*</b>
+                                        <label for="">Día</label> <b>*</b>
 
                                         <select name="dia" id="" class="form-control" required>
                                             <option value="LUNES">LUNES</option>

@@ -32,4 +32,8 @@ class Medicos extends Model
     public function consultorio(){
         return $this->hasMany(Consultorio::class);
     }
+
+    public function event(){
+        return $this->hasMany(Event::class); 
+    }   
 }

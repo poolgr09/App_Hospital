@@ -6,7 +6,10 @@ use App\Models\Personas;
 use App\Models\User;
 use App\Models\Especialidades;
 use App\Models\Medicos;
+use App\Models\Event;
+use App\Models\Pacientes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class MedicosController extends Controller
@@ -49,6 +52,7 @@ class MedicosController extends Controller
         ]);
     
            $persona= new Personas();
+           $usuario = new User();
            $persona->cedula = $request->cedula;
            $persona->nombres = $request->nombres;
            $persona->apellidos = $request->apellidos;
@@ -58,22 +62,24 @@ class MedicosController extends Controller
            $persona->fecha_nacimiento = $request->fecha_nacimiento;
            $persona->direccion = $request->direccion;
            $persona->tipo_sangre = $request->tipo_sangre;
-           $persona->save();
+          
     
-           $usuario = new User();
+           
            $usuario->name = $request->user_name;
            $usuario->email = $request->email;
            $usuario->password = Hash::make($request['password']);
            $usuario->save();
            
            $medico = new Medicos();
+           $persona->user_id = $usuario->id;
+           $persona->save();
            $medico->user_id = $usuario->id;
            $medico->persona_id = $persona->id;
            $medico->save();
            
            $medico-> especialidad()->attach($request->input('especialidades'));
            
-           
+           $usuario->assignRole('medico');
     
            return redirect()->route ('admin.medicos.index')->with('mensaje','¡Datos registrados con exitoso!');
     
@@ -129,7 +135,7 @@ class MedicosController extends Controller
            $persona->fecha_nacimiento = $request->fecha_nacimiento;
            $persona->direccion = $request->direccion;
            $persona->tipo_sangre = $request->tipo_sangre;
-           $persona->save();
+          
 
           
            $usuario->name = $request->user_name;
@@ -137,7 +143,8 @@ class MedicosController extends Controller
            $usuario->password = Hash::make($request['password']);
            $usuario->save();
 
-          
+           $persona->user_id = $usuario->id;
+           $persona->save();
            $medico->user_id = $usuario->id;
            $medico->persona_id = $persona->id;
            $medico->save();
@@ -167,4 +174,20 @@ class MedicosController extends Controller
         $medico = Medicos::destroy($id);
         return redirect()->route ('admin.medicos.index')->with('mensaje','¡Datos eliminados con exitoso!');
     }
+
+    public function vercitas()
+    {
+        $user_id = Auth::user()->id;
+        $medicos = Medicos::where('user_id',$user_id)->get();
+        $medico_id = $medicos->first()->id;
+        $citas = Event::where('medico_id',$medico_id)->get();
+        $paciente_id = $citas->first()->user_id;
+        $pacientes = Pacientes::where('user_id',$paciente_id)->get();
+        $especialidad_id = $citas->first()->especialidad_id;
+        $especialidades = Especialidades::where('id',$especialidad_id)->get();
+     
+        return view('admin.vercitas', compact('citas', 'pacientes', 'especialidades'));
+    }
+
+
 }

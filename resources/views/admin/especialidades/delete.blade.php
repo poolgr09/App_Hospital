@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Descripcion</label> 
+                                    <label for="">Descripción</label> 
                                     <input type="text" value="{{$especialidades->descripcion}}" name="descripcion" class="form-control" disabled>
                                     @error('descripcion')
                                         <small style="color: red"> {{$message}} </small>

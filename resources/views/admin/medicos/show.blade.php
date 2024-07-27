@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row col-md-12">
-        <h3>Medico: {{$medicos->persona->nombres}} {{$medicos->persona->apellidos}}</h3>
+        <h3>Médico: {{$medicos->persona->nombres}} {{$medicos->persona->apellidos}}</h3>
     </div>
     <hr>
     <div class="row col-md-12">
@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form group">
-                                    <label for="">Cedula</label>
+                                    <label for="">Cédula</label>
                                     <p>{{$medicos->persona->cedula}}</p>
                                    
                                 </div>

@@ -113,7 +113,7 @@
 
         <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
           <h2>BIENVENIDO</h2>
-          
+
           <p>Al Hospital General Isidro Ayora</p>
         </div><!-- End Welcome -->
 

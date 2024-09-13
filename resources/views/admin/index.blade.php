@@ -151,6 +151,25 @@
         @endcan
     </div>
 
+    {{-- Modulo emergencias --}}
+        @can('admin.usuarios.index')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3>{{ $total_consultorios}}</h3>
+                        <p>Emergencias</p> 
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <a href="{{ url('admin/consultorios') }}" class="small-box-footer">
+                        Más información <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endcan
+    </div>
+
     {{-- Modulo citas --}}
     <div class="row col-md-12">
         @can('admin.medicos.index')

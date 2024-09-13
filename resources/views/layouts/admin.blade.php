@@ -257,6 +257,33 @@
               </li>
             @endcan
 
+            <!--modulo emergencias-->
+            @can('admin.usuarios.index') 
+            <li class="nav-item">
+              <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">
+                <i class="nav-icon fas bi bi-calendar2-date"></i>
+                <p>
+                  Emergencias
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{url('admin/triajes/create')}}" class="nav-link active bg-lightblue">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Creación de triaje</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('admin/triajes')}}" class="nav-link active bg-lightblue">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Listar triaje</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            @endcan
+
             <!--modulo cita-->
             <li class="nav-item">
               <a href="{{url('#')}}" class="nav-link active btn btn-outline-info">

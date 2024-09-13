@@ -99,7 +99,7 @@ class PacientesController extends Controller
         $pacientes = Pacientes::with('user','persona')-> findOrFail($id);
         return view('admin.pacientes.show', compact('pacientes'));
     }
-
+ 
     /**
      * Show the form for editing the specified resource.
      */

@@ -29,6 +29,16 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->na
 Route::get('/admin/citas_reservadas/{id}', [App\Http\Controllers\AdminController::class,'citas_reservadas'])->name('admin.citas_reservadas');
 Route::delete('/admin/delete_citas/{id}', [App\Http\Controllers\AdminController::class, 'delete_citas'])->name('admin.events.delete_citas');
 
+//Rutas para el triaje
+Route::get('/admin/triajes', [App\Http\Controllers\TriajController::class, 'index'])->name('admin.triajes.index')->middleware('auth', 'can:admin.usuarios.index');
+Route::get('/admin/triajes/create', [App\Http\Controllers\TriajController::class, 'create'])->name('admin.triajes.create')->middleware('auth', 'can:admin.usuarios.create');
+Route::post('/admin/triajes/create', [App\Http\Controllers\TriajController::class, 'store'])->name('admin.triajes.store')->middleware('auth', 'can:admin.usuarios.store');
+Route::get('/admin/triajes/{id}', [App\Http\Controllers\TriajController::class, 'show'])->name('admin.triajes.triajesshow')->middleware('auth', 'can:admin.usuarios.show');
+Route::get('/admin/triajes/{id}/edit', [App\Http\Controllers\TriajController::class, 'edit'])->name('admin.triajes.edit')->middleware('auth', 'can:admin.usuarios.edit');
+Route::put('/admin/triajes/{id}', [App\Http\Controllers\TriajController::class, 'update'])->name('admin.triajes.update')->middleware('auth', 'can:admin.usuarios.update');
+Route::get('/admin/triajes/{id}/confirm-delete', [App\Http\Controllers\TriajController::class, 'confirmDelete'])->name('admin.triajes.confirmDelete')->middleware('auth', 'can:admin.usuarios.confirmDelete');
+Route::delete('/admin/triajes/{id}', [App\Http\Controllers\TriajController::class, 'destroy'])->name('admin.triajes.destroy')->middleware('auth', 'can:admin.usuarios.destroy');
+
 
 //Rutas para el usuario
 Route::get('/admin/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->name('admin.usuarios.index')->middleware('auth', 'can:admin.usuarios.index');

@@ -5,13 +5,12 @@
     <div class="row col-md-12">
         <div class="card card-primary col-md-12">
             <div class="card-header bg-lightblue">
-                    <h3 class="card-title">Pacientes Registrados</h3>
+                    <h3 class="card-title">Triajes Registrados</h3>
                 <div class="card-tools">
-                    <a href="{{url('admin/pacientes/create')}}" class="btn btn-secondary bg-white">
+                    <a href="{{url('admin/triajes/create')}}" class="btn btn-secondary bg-white">
                         Registro nuevo 
                     </a>
                 </div>
-            
             </div>
             
             <div class="card-body" style="display: block;">
@@ -26,29 +25,28 @@
                         <th scope="col">Cedula</th>
                         <th scope="col">Nombres</th>
                         <th scope="col">Apellidos</th>
-                        <th scope="col">Celular</th>
                         <th scope="col">Fecha de nacimiento</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">Genero</th>
+                        <th scope="col">Triaje</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pacientes as $paciente)
+                        @foreach ($triajes as $triaje)
                         <tr>
-                            <td> {{$paciente->persona->cedula}} </td>
-                            <td> {{$paciente->persona->nombres}} </td>
-                            <td> {{$paciente->persona->apellidos}} </td>
-                            <td> {{$paciente->persona->celular}} </td>
-                            <td> {{$paciente->persona->fecha_nacimiento}} </td>
-                            <td> {{$paciente->persona->direccion}} </td>
-                            <td> {{$paciente->user->email}} </td> 
+                            <td> {{$triaje->paciente->persona->cedula}} </td>
+                            <td> {{$triaje->$paciente->persona->nombres}} </td>
+                            <td> {{$triaje->$paciente->persona->apellidos}} </td>
+                            <td> {{$triaje->$paciente->persona->celular}} </td>
+                            <td> {{$triaje->$paciente->persona->fecha_nacimiento}} </td>
+                            <td> {{$triaje->$paciente->persona->direccion}} </td>
+                            <td> {{$triaje->$paciente->user->email}} </td> 
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{url('admin/pacientes/'.$paciente->id)}}" type="button" class="btn btn-outline-info btn-sm"><i class="bi bi-eye-fill"></i></a>
-                                    <a href="{{url('admin/pacientes/'.$paciente->id.'/edit')}}" type="button" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-fill"></i></a>
-                                    <a href="{{url('admin/pacientes/'.$paciente->id.'/confirm-delete')}}" type="button" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                                  <a href="{{url('admin/triajes/'.$paciente->id)}}" type="button" class="btn btn-outline-info btn-sm"><i class="bi bi-arrow-through-heart"></i></a>
+                                    <a href="{{url('admin/triajes/'.$paciente->id)}}" type="button" class="btn btn-outline-info btn-sm"><i class="bi bi-eye-fill"></i></a>
+                                    <a href="{{url('admin/triajes/'.$paciente->id.'/edit')}}" type="button" class="btn btn-outline-success btn-sm"><i class="bi bi-pencil-fill"></i></a>
+                                    <a href="{{url('admin/triajes/'.$paciente->id.'/confirm-delete')}}" type="button" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
                                   </div>
                             </td>
                         </tr>
